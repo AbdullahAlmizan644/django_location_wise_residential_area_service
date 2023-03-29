@@ -20,6 +20,40 @@
     <!-- Custom styles for this template-->
     <link href={% static "user_auth/css/sb-admin-2.min.css" %} rel="stylesheet">
 
+    <style>
+        label{
+            display: block;
+            font-weight: bolder;
+            font-size: 25px;
+            color: lightcoral;
+            
+        }
+        input{
+            display: block;
+            width: 40vw;
+            margin: 10px;
+            height: 50px;
+            font-weight: bolder;
+            color: black;
+            
+        }
+
+        li{
+            font-size: 20px;
+            
+        }
+        textarea{
+            width: 40vw;
+        }
+    
+        select{
+            display: block;
+            width: 40vw;
+            margin: 10px;
+            height: 50px;
+    
+        }
+    </style>
 </head>
 
 <body class="bg-gradient-primary">
@@ -38,9 +72,28 @@
                 <!-- Nested Row within Card Body -->
                 <div class="row">
                     
-                    <!-- <div class="col-lg-5 d-none d-lg-block bg-register-image"></div> -->
+                    <!-- <div class="col-lg-5 d-none d-lg-block bg-register-image">SignUp</div> -->
                     <div class="col-lg-12">
-                        <div class="p-5">
+                        <div class="text-center">
+                            <h1 class="h4 text-gray-900 mb-4 my-3">Register</h1>
+                        </div>
+                        <div class="signup" style="margin:100px">
+                            <form method="post" action="{% url 'user_signup' %}" id='signup'>
+                                {% csrf_token %}
+                                {{ form }}
+                                <br>
+                                <br>
+                                <button class="btn btn-lg btn-primary" type="submit" form="signup">Signup</button>
+                            </form>
+                            <hr>
+                            <div class="text-center">
+                                <a class="small" href="forgot-password.html">Forgot Password?</a>
+                            </div>
+                            <div class="text-center">
+                                <a class="small" href="{% url 'user_login' %}">Already have an account? Login!</a>
+                            </div>
+                        </div>
+                        <!-- <div class="p-5">
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
                             </div>
@@ -77,13 +130,13 @@
                                 <button class="btn btn-primary btn-user btn-block" form="register">Register
                                     account</button>
 
-                                <!-- <hr>
+                                <hr>
                                 <a href="index.html" class="btn btn-google btn-user btn-block">
                                     <i class="fab fa-google fa-fw"></i> Register with Google
                                 </a>
                                 <a href="index.html" class="btn btn-facebook btn-user btn-block">
                                     <i class="fab fa-facebook-f fa-fw"></i> Register with Facebook
-                                </a> -->
+                                </a>
 
                             </form>
                             <hr>
@@ -93,7 +146,7 @@
                             <div class="text-center">
                                 <a class="small" href="{% url 'user_login' %}">Already have an account? Login!</a>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>

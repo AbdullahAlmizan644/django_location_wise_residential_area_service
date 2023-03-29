@@ -1,8 +1,9 @@
 from django.shortcuts import render,HttpResponse,redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,logout,login
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
-
+from .forms import RentForm,TeacherForm,TutionForm
 # Create your views here.
 
 def user_login(request):
@@ -31,44 +32,19 @@ def user_logout(request):
 
 
 def user_signup(request):
-    if request.method=="POST":
-        first_name=request.POST["f_name"]
-        last_name=request.POST["l_name"]
-        email=request.POST["email"]
-        username=request.POST["username"]
-        pass1=request.POST["pass1"]
-        pass2=request.POST["pass2"]
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return redirect('/')
+    else:
+        form = UserCreationForm()
+    return render(request, 'user_auth/register.html', {'form': form})
 
-        old_user=User.objects.get(username=username)
-
-        if old_user:
-            messages.error(request, "Username already exists")
-            return redirect("/user_signup")
-
-        if len(username)<4:
-            messages.error(request, "Username must be greater than 4 digits")
-            return redirect("/user_signup")
-
-        if len(email)<4:
-            messages.error(request, "Email must be greater than 4 digits")
-            return redirect("/user_signup")
-
-        if len(pass1)<8:
-            messages.error(request, "Password must be greate than 8 digit")
-            return redirect("/user_signup")
-
-        if pass1!=pass2:
-            messages.error(request, "Password doesn't match")
-            return redirect("/user_signup")
-
-        else:
-            user=User.objects.create_user(username,email,pass1)
-            user.first_name=first_name
-            user.last_name=last_name
-            user.save()
-            messages.success(request,"your registration complete")
-            return redirect("/")
-    return render(request, "user_auth/register.html")
 
 
 def user_dashboard(request):
@@ -80,4 +56,90 @@ def user_dashboard(request):
     else:
         return redirect("/user_login")
 
+
+
+def house_rent_post(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            form = RentForm(request.POST, request.FILES)
+            if form.is_valid():
+                instance = form.save(commit=False)
+                instance.creator = request.user
+                instance.save()
+                
+                messages.success(request,"Post Added Successfully")
+                return redirect(user_dashboard)
+            else:
+                form = RentForm()
+             
+            return render(request, 'user_auth/house_rent_post.html', {
+                'form': form
+            })
+        
+        return render(request, 'user_auth/house_rent_post.html',{
+            "c_username":request.user
+        })
+
+ 
+
+    else:
+        return redirect("/user_login")
+     
+
+
+def teacher_post(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            form = TeacherForm(request.POST, request.FILES)
+            if form.is_valid():
+                instance = form.save(commit=False)
+                instance.creator = request.user
+                instance.save()
+                
+                messages.success(request,"Post Added Successfully")
+                return redirect(user_dashboard)
+            else:
+                form = TeacherForm()
+             
+            return render(request, 'user_auth/teacher_post.html', {
+                'form': form
+            })
+        
+        return render(request, 'user_auth/teacher_post.html',{
+            "c_username":request.user
+        })
+
+
+    else:
+        return redirect("/user_login")
+     
+
+
+
+def tution_post(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            form = TutionForm(request.POST, request.FILES)
+            if form.is_valid():
+                instance = form.save(commit=False)
+                instance.creator = request.user
+                instance.save()
+                
+                messages.success(request,"Post Added Successfully")
+                return redirect(user_dashboard)
+            else:
+                form = TutionForm()
+             
+            return render(request, 'user_auth/tution_post.html', {
+                'form': form
+            })
+        
+        return render(request, 'user_auth/tution_post.html',{
+            "c_username":request.user
+        })
+
+
+    else:
+        return redirect("/user_login")
+     
 
