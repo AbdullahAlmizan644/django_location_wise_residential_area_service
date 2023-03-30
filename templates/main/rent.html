@@ -10,7 +10,7 @@
                 <div class="breadcrumb-text">
                     <h4>Find Home</h4>
                     <div class="bt-option">
-                        <a href="./index.html"><i class="fa fa-home"></i> Home</a>
+                        <a href="{% url 'index' %}"><i class="fa fa-home"></i> Home</a>
                         <span>House</span>
                     </div>
                 </div>
@@ -271,20 +271,21 @@
                 </div> -->
         </div>
         <div class="row property-filter">
+            {% for post in all_rent_post %}
             <div class="col-lg-4 col-md-6 mix all house">
                 <div class="property-item">
-                    <div class="pi-pic set-bg" data-setbg={% static "main/img/ren1.jpg" %}>
+                    <div class="pi-pic set-bg" data-setbg="{{post.home_image_one.url}}">
                         <div class="label">For rent</div>
                     </div>
                     <div class="pi-text">
                         <!-- <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a> -->
-                        <div class="pt-price">20000tk<span>/month</span></div>
-                        <h5><a href="#">Rent house in Khulshi</a></h5>
-                        <p><span class="icon_pin_alt"></span> Khulshi,Chittagong</p>
+                        <div class="pt-price">{{ post.rent_price }}tk<span>/month</span></div>
+                        <h5><a href="{% url "rent_details" post.id %}">{{ post.title }}</a></h5>
+                        <p><span class="icon_pin_alt"></span> {{post.district}},{{post.division}}</p>
                         <ul>
-                            <li><i class="fa fa-object-group"></i> 2, 283</li>
-                            <li><i class="fa fa-bathtub"></i> 03</li>
-                            <li><i class="fa fa-bed"></i> 05</li>
+                            <li><i class="fa fa-object-group"></i>{{post.total_square_feet}}</li>
+                            <li><i class="fa fa-bathtub"></i> {{ post.total_washroom }}</li>
+                            <li><i class="fa fa-bed"></i> {{ post.total_bed }}</li>
                             <!-- <li><i class="fa fa-automobile"></i> 01</li> -->
                         </ul>
                         <!-- <div class="pi-agent">
@@ -301,67 +302,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6 mix all house">
-                <div class="property-item">
-                    <div class="pi-pic set-bg" data-setbg={% static "main/img/rent3.jpeg" %}>
-                        <div class="label">For rent</div>
-                    </div>
-                    <div class="pi-text">
-                        <!-- <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a> -->
-                        <div class="pt-price">18000tk<span>/month</span></div>
-                        <h5><a href="#">Rent house in chawkbazar</a></h5>
-                        <p><span class="icon_pin_alt"></span> chawkbazar,Chittagong</p>
-                        <ul>
-                            <li><i class="fa fa-object-group"></i> 2, 283</li>
-                            <li><i class="fa fa-bathtub"></i> 03</li>
-                            <li><i class="fa fa-bed"></i> 05</li>
-                            <!-- <li><i class="fa fa-automobile"></i> 01</li> -->
-                        </ul>
-                        <!-- <div class="pi-agent">
-                                <div class="pa-item">
-                                    <div class="pa-info">
-                                        <img src={% static "main/img/property/posted-by/pb-1.jpg" %} alt="">
-                                        <h6>Ashton Kutcher</h6>
-                                    </div>
-                                    <div class="pa-text">
-                                        123-455-688
-                                    </div>
-                                </div>
-                            </div> -->
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
 
-            <div class="col-lg-4 col-md-6 mix all house">
-                <div class="property-item">
-                    <div class="pi-pic set-bg" data-setbg={% static "main/img/ren1.jpg" %}>
-                        <div class="label">For rent</div>
-                    </div>
-                    <div class="pi-text">
-                        <!-- <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a> -->
-                        <div class="pt-price">13000tk<span>/month</span></div>
-                        <h5><a href="#">Rent house in abashik</a></h5>
-                        <p><span class="icon_pin_alt"></span> Abashik,Chittagong</p>
-                        <ul>
-                            <li><i class="fa fa-object-group"></i> 2, 283</li>
-                            <li><i class="fa fa-bathtub"></i> 03</li>
-                            <li><i class="fa fa-bed"></i> 05</li>
-                            <!-- <li><i class="fa fa-automobile"></i> 01</li> -->
-                        </ul>
-                        <!-- <div class="pi-agent">
-                                <div class="pa-item">
-                                    <div class="pa-info">
-                                        <img src={% static "main/img/property/posted-by/pb-1.jpg" %} alt="">
-                                        <h6>Ashton Kutcher</h6>
-                                    </div>
-                                    <div class="pa-text">
-                                        123-455-688
-                                    </div>
-                                </div>
-                            </div> -->
-                    </div>
-                </div>
-            </div>
             <!-- <div class="col-lg-4 col-md-6 mix all restaurent hotel">
                     <div class="property-item">
                         <div class="pi-pic set-bg" data-setbg="img/property/property-2.jpg">
@@ -520,7 +462,7 @@
 
 
 <!-- Contact Section Begin -->
-<section class="contact-section">
+<!-- <section class="contact-section">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6">
@@ -531,7 +473,7 @@
                             </div>
                             <div class="ci-text">
                                 <h5>Address</h5>
-                                <p>160 Pennsylvania Ave NW, Washington, Castle, PA 16101-5161</p>
+                                <p>Chittagong</p>
                             </div>
                         </div>
                         <div class="ci-item">
@@ -541,8 +483,7 @@
                             <div class="ci-text">
                                 <h5>Phone</h5>
                                 <ul>
-                                    <li>125-711-811</li>
-                                    <li>125-668-886</li>
+                                    <li>018-xxx-xxx</li>
                                 </ul>
                             </div>
                         </div>
@@ -552,7 +493,7 @@
                             </div>
                             <div class="ci-text">
                                 <h5>Support</h5>
-                                <p>Support.aler@gmail.com</p>
+                                <p>Support.@mail.com</p>
                             </div>
                         </div>
                     </div>
@@ -564,7 +505,7 @@
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d735515.5813275519!2d-80.41163541934742!3d43.93644386501528!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882a55bbf3de23d7%3A0x3ada5af229b47375!2sMono%2C%20ON%2C%20Canada!5e0!3m2!1sen!2sbd!4v1583262687289!5m2!1sen!2sbd"
                 height="450" style="border:0;" allowfullscreen=""></iframe>
         </div>
-    </section>
+    </section> -->
 <!-- Contact Section End -->
 
 {% endblock %}
