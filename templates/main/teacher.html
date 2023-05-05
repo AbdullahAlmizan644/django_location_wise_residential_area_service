@@ -63,7 +63,7 @@
                                 <li>Email <span>{{ post.email }}</span></li>
                                 <li>Phone <span>{{ post.phone_number}}</span></li>
                             </ul>
-                            <a href="#" class="primary-btn">View details</a>
+                            <a href="{% url 'teacher_details' post.id %}" class="primary-btn">View details</a>
                         </div>
                     </div>
                 </div>

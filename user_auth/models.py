@@ -9,6 +9,12 @@ from django.utils.timezone import now
 #     c_user=request.user
 #     return c_user
 
+class Poster(models.Model):
+    poster_image_one=models.ImageField(upload_to="images/",verbose_name='poseter image one size-->width:1170 height:780')
+    poster_image_two=models.ImageField(upload_to="images/")
+    poster_image_three=models.ImageField(upload_to="images/")
+
+
 class Rent(models.Model):
     title=models.CharField(max_length=1000)
     home_description=models.TextField()
@@ -127,6 +133,7 @@ class Tution(models.Model):
     district=models.CharField(choices=district_choices,max_length=1000)
     details_address=models.TextField()
     teacher_details=models.TextField()
+    tution_image=models.ImageField(upload_to="images/")
     datetime=models.DateTimeField(default=now)
     creator = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
 
@@ -144,3 +151,13 @@ class Contact(models.Model):
 
     def __str__(self):
         return f"id:{self.id} name:{self.name}"
+    
+
+class RentComment(models.Model):
+    rent=models.ForeignKey(Rent, on_delete=models.CASCADE)
+    comment=models.TextField()
+    username=models.CharField(max_length=100)
+    datetime=models.DateTimeField(default=now)
+
+    def __str__(self):
+        return f"{self.username} {self.comment[0:20]}......"

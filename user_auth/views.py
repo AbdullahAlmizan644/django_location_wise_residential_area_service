@@ -1,7 +1,7 @@
 from django.shortcuts import render,HttpResponse,redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,logout,login
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm,PasswordResetForm
 from django.contrib import messages
 from .forms import RentForm,TeacherForm,TutionForm
 # Create your views here.
@@ -20,8 +20,23 @@ def user_login(request):
             
         else:
             messages.error(request, "wrong username or password")
-            return redirect("/")
+            return redirect(request.path)
+        
     return render(request, "user_auth/login.html")
+
+
+
+def forget_password(request):
+    if request.method == 'POST':
+        form = PasswordResetForm(request.POST)
+        if form.is_valid():
+            form.save()
+            # Redirect to success page
+            messages.error(request, "Password reset successfully")
+            return redirect(user_login)
+    else:
+        form = PasswordResetForm()
+    return render(request, 'user_auth/forget_password.html', {'form': form})
 
 
 
@@ -40,7 +55,8 @@ def user_signup(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
-            return redirect('/')
+            messages.success(request, "Account Created successfully now login")
+            return redirect(user_login)
     else:
         form = UserCreationForm()
     return render(request, 'user_auth/register.html', {'form': form})

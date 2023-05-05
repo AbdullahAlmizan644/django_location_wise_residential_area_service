@@ -227,15 +227,15 @@
     //price range
     $("#price-range").slider({
         range: true,
-        min: 0,
-        max: 1500,
-        step: 100,
-        values: [100, 1000],
+        min: 1000,
+        max: 15000,
+        step: 1000,
+        values: [1000, 15000],
         slide: function (event, ui) {
-            $("#priceRange").val("[ " + ui.values[0] + " - " + ui.values[1] + " ]" + " $");
+            $("#priceRange").val("[ " + ui.values[0] + " - " + ui.values[1] + " ]" + " tk");
         }
     });
-    $("#priceRange").val("[ " + $("#price-range").slider("values", 0) + " - " + $("#price-range").slider("values", 1) + " ]" + " $");
+    $("#priceRange").val("[ " + $("#price-range").slider("values", 0) + " - " + $("#price-range").slider("values", 1) + " ]" + " tk");
 
      //Text editor
     $('.texteditor-content').richText();

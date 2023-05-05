@@ -70,8 +70,8 @@
                 <div class="row">
                     <div class="col-lg-2">
                         <div class="logo">
-                            <!-- <a href="./index.html"><img src={% static "main/img/logo.png"%} alt=""></a> -->
-                            <h5 style="text-transform: uppercase; color: lightseagreen;">Residential Area Services</h5>
+                            <a href="./index.html"><img src={% static "main/img/logo1.png"%} alt=""></a>
+                            <!-- <h5 style="text-transform: uppercase; color: lightseagreen;">Residential Area Services</h5> -->
                         </div>
                     </div>
                     <div class="col-lg-10">
@@ -128,6 +128,13 @@
             </div>
         </div>
     </header>
+    {% for message in messages %}
+
+        <div class="alert alert-{{ message.tags }} my-3" role="alert">
+            {{ message }}
+          </div>
+          
+    {% endfor %}
 
 
     {% block content %}  {% endblock %}

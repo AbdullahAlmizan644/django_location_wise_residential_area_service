@@ -110,45 +110,33 @@
                         </div>
                     </div> -->
                     <div class="bc-widget">
-                        <h4>3 Comment</h4>
-
+                        <h4>{{total_comments}} Comment</h4>
+                        
+                        {% for comment in all_comments %}
                         <div class="comment-option">
                             <div class="co-item">
                                 <div class="ci-text">
-                                    <h5>User1</h5>
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit....</p>
+                                    <h5>{{ comment.username }}</h5>
+                                    <p>{{ comment.comment}}.</p>
                                     <ul>
-                                        <li><i class="fa fa-clock-o"></i> Seb 17, 2019</li>
-                                        <!-- <li><i class="fa fa-heart-o"></i> 12</li>
-                                        <li><i class="fa fa-share-square-o"></i> 1</li> -->
+                                        <li><i class="fa fa-clock-o"></i>{{ comment.datetime }}</li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="comment-option">
-                            <div class="co-item">
-                                <div class="ci-text">
-                                    <h5>User2</h5>
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit....</p>
-                                    <ul>
-                                        <li><i class="fa fa-clock-o"></i> Seb 17, 2019</li>
-                                        <!-- <li><i class="fa fa-heart-o"></i> 12</li>
-                                        <li><i class="fa fa-share-square-o"></i> 1</li> -->
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+                        {% endfor %}
+                        
                     </div>
                     <div class="bc-widget">
                         <h4>Leave a comment</h4>
-                        <form action="#" class="leave-comment-form">
+                        <form action={% url "rent_details" post.id %} method="post" class="leave-comment-form">
+                            {% csrf_token %}
                             <!-- <div class="group-input">
                                 <input type="text" placeholder="Name">
                                 <input type="text" placeholder="Email">
                                 <input type="text" placeholder="Website">
                             </div> -->
-                            <textarea placeholder="Comment"></textarea>
+                            <textarea placeholder="Comment" name="comment"></textarea>
                             <button type="submit" class="site-btn">Submit</button>
                         </form>
                     </div>

@@ -34,6 +34,8 @@
           
         {% endfor %}
 
+
+
         <!-- Outer Row -->
         <div class="row justify-content-center">
 
@@ -80,10 +82,13 @@
                                     </form>
                                     <hr>
                                     <div class="text-center">
-                                        <a class="small" href="forgot-password.html">Forgot Password?</a>
+                                        <a class="small" href={% url "forget_password" %}>Forgot Password?</a>
                                     </div>
                                     <div class="text-center">
                                         <a class="small" href="{% url 'user_signup' %}">Create an Account!</a>
+                                    </div>
+                                    <div class="text-center">
+                                        <a class="small" href="{% url 'index' %}">Return Home</a>
                                     </div>
                                 </div>
                             </div>
