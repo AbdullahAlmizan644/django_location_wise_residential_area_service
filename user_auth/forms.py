@@ -7,7 +7,7 @@ class RentForm(forms.ModelForm):
         model=Rent
         fields=('title','home_description','rent_price',
                 'total_square_feet','total_washroom','total_bed','phone_number','division','district',
-                'home_image_one','home_image_two', 'home_image_three','datetime',)
+                'home_image_one','home_image_two', 'home_image_three','datetime','latitude','longitude')
 
 
 class TeacherForm(forms.ModelForm):
