@@ -54,6 +54,8 @@ class Rent(models.Model):
     home_image_three=models.ImageField(upload_to="images/")
     datetime=models.DateTimeField(default=now)
     creator = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    latitude = models.FloatField()
+    longitude = models.FloatField()
 
 
     def __str__(self):

@@ -115,23 +115,23 @@
         <div class="search-form-content">
             <form action="{% url "index" %}" method="post" class="filter-form">
                 {% csrf_token %}
-                <select class="sm-width" name="city">
+                <select class="sm-width" name="city" required>
                     <option value="">Chose The City</option>
                     <option value="Dhaka">Dhaka</option>
                     <option value="Chittagong">Chittagong</option>
                 </select>
-                <select class="sm-width" name="location">
+                <select class="sm-width" name="location" required>
                     <option value="">Location</option>
                     <option value="Gec Moor">Gec Moor</option>
                     <option value="Mirpur">Mirpur</option>
                     <option value="Chawkbazar">Chawkbazar</option>
                     <option value="Gulshan">Gulshan</option>
                 </select>
-                <select class="sm-width" name="pStatus">
+                <select class="sm-width" name="pStatus" required>
                     <option value="">Property Status</option>
                     <option value="rent">Rent</option>
                 </select>
-                <select class="sm-width" name="pType">
+                <select class="sm-width" name="pType" required>
                     <option value="">Property Type</option>
                     <option value="">Rent</option>
                 </select>
@@ -149,11 +149,11 @@
                     <option value="3">3</option>
                 </select> -->
                     <label for="">No of Bedrooms</label>
-                    <input type="number"  name="bedrooms">
+                    <input type="number"  name="bedrooms" required>
 
 
                     <label for="">No of Bathrooms</label>
-                    <input type="number" name="bathrooms">
+                    <input type="number" name="bathrooms" required>
                 
                 
 
