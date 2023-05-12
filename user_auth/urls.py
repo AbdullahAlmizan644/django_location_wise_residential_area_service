@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import user_login,user_signup,user_dashboard,user_logout,house_rent_post,teacher_post,tution_post,forget_password
+from .views import *
 
 urlpatterns=[
     path("user_login",user_login,name="user_login"),
@@ -10,4 +10,7 @@ urlpatterns=[
     path("house_rent_post",house_rent_post,name="house_rent_post"),
     path("teacher_post",teacher_post,name="teacher_post"),
     path("tution_post",tution_post,name="tution_post"),
+    path("my_rent",my_rent,name="my_rent"),
+    path("bill/<int:id>",bill,name="bill"),
+
 ]

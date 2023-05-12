@@ -4,6 +4,8 @@ from django.contrib.auth import authenticate,logout,login
 from django.contrib.auth.forms import UserCreationForm,PasswordResetForm
 from django.contrib import messages
 from .forms import RentForm,TeacherForm,TutionForm
+from home.models import RentPurchaserDetails
+
 # Create your views here.
 
 def user_login(request):
@@ -150,12 +152,23 @@ def tution_post(request):
                 'form': form
             })
         
-        return render(request, 'user_auth/tution_post.html',{
-            "c_username":request.user
-        })
+        
+        
 
 
     else:
         return redirect("/user_login")
      
 
+
+def my_rent(request):
+    rent_details=RentPurchaserDetails.objects.filter(buyer_name=request.user).all()
+    return render(request, 'user_auth/my_rent.html',{
+        "rent_details":rent_details,
+    })
+
+def bill(request,id):
+    post=RentPurchaserDetails.objects.filter(id=id).first()
+    return render(request,"user_auth/bill.html",{
+        "post":post,
+    })

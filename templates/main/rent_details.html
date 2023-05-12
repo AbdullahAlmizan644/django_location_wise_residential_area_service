@@ -54,6 +54,10 @@
                         
                     </div>
 
+
+                    <a href="{% url "take_rent" post.id %}"><button class="site-btn my-2">Take Rent Service</button></a>
+                    <br><br>
+
                     
 
                     
@@ -186,22 +190,24 @@
             </div>
         </div>
     </div>
-    <div class="cs-map">
+    <!-- <div class="cs-map">
         <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d735515.5813275519!2d-80.41163541934742!3d43.93644386501528!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882a55bbf3de23d7%3A0x3ada5af229b47375!2sMono%2C%20ON%2C%20Canada!5e0!3m2!1sen!2sbd!4v1583262687289!5m2!1sen!2sbd"
                 height="450" style="border:0;" allowfullscreen=""></iframe> 
-    </div>
+    </div> -->
 
 
 
 </section>
 <!-- Contact Section End -->
 
-<!-- <div id="map"></div>
+<div id="map">
+    <iframe src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBMQgZvqzCVG0FFT5RsE59wjEYzQLncahI&libraries=places" frameborder="0"></iframe>
+</div>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=API_KEY&callback=initMap" async defer></script>
-
-<script>
+<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBMQgZvqzCVG0FFT5RsE59wjEYzQLncahI&callback=initMap" async defer></script> -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBMQgZvqzCVG0FFT5RsE59wjEYzQLncahI&libraries=places"></script>
+<!-- <script>
     function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: 0, lng: 0},
@@ -216,5 +222,22 @@
 
     }
 </script> -->
+
+<script>
+    function initMap() {
+      // Create a new map instance
+      var map = new google.maps.Map(document.getElementById('map'), {
+        center: { lat: 37.7749, lng: -122.4194 }, // Set the initial center of the map
+        zoom: 12 // Set the initial zoom level
+      });
+    }
+  </script>
+
+<script>
+    // Load the map when the page has finished loading
+    window.onload = function() {
+      initMap();
+    };
+  </script>
 
 {% endblock %}

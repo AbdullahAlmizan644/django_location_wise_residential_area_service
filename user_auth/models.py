@@ -163,3 +163,19 @@ class RentComment(models.Model):
 
     def __str__(self):
         return f"{self.username} {self.comment[0:20]}......"
+    
+
+
+class RentPayment(models.Model):
+    name=models.CharField(max_length=200)
+    country=models.CharField(max_length=200)
+    division=models.CharField(max_length=200)
+    district=models.CharField(max_length=200)
+    address=models.CharField(max_length=200)
+    zip_code=models.CharField(max_length=200)
+    rent_price=models.CharField(max_length=200)
+    payment=models.CharField(max_length=200)
+    datetime=models.DateTimeField(default=now)
+
+    def __str__(self):
+        return f"{self.name}"

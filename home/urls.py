@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import index,about,contact,teacher,tution,rent,rent_details,teacher_details,tution_details
+from .views import index,about,contact,teacher,tution,rent,rent_details,teacher_details,tution_details,take_rent
 
 
 urlpatterns=[
@@ -12,5 +12,5 @@ urlpatterns=[
     path("tution_details/<int:id>",tution_details,name="tution_details"),
     path("rent",rent,name="rent"),
     path("rent_details/<int:id>",rent_details,name="rent_details"),
-
+    path("take_rent/<int:owner_id>",take_rent,name="take_rent")
 ]

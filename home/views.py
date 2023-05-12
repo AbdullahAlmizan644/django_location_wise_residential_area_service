@@ -1,6 +1,7 @@
 from django.shortcuts import render,HttpResponse,redirect
 from user_auth.models import Rent,Teacher,Tution,Poster,RentComment
 from user_auth.models import Contact
+from .models import RentPurchaserDetails
 from django.contrib import messages
 
 # Create your views here.
@@ -115,4 +116,18 @@ def tution_details(request,id):
     return render(request, "main/tution_details.html",{
         "post":post,
     })
+
+
+def take_rent(request,owner_id):
+    owner=Rent.objects.filter(id=owner_id).first()
+
+    obj=RentPurchaserDetails(owner_name=owner.creator,buyer_name=request.user,
+                             district=owner.district,division=owner.division,
+                             rent_price=owner.rent_price,square_foot=owner.total_square_feet,washroom=owner.total_washroom,
+                             bedroom=owner.total_bed)
+    obj.save()
+    messages.success(request, "Thanks You take rent service go to dahboard my rent for details")
+    return redirect("/") 
+
+
 
